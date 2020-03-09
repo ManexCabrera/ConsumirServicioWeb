@@ -38,7 +38,6 @@
                     console.log("todo bien");
                     var datos = this.responseText;
                     console.log(datos);
-                    //document.getElementById("demo").innerHTML = "gfdagdagdga";
                 
                 var misdatos = JSON.parse(datos); // Array de datos
                 console.log(misdatos);
@@ -55,11 +54,9 @@
                 document.getElementById("Fecha").innerHTML = "<b>Fecha: </b>" + values[2];
                 document.getElementById("Base").innerHTML = "<b>Base: </b>" + values[1];
 
-                //document.getElementById("tabla").innerHTML = txtDatos;
+
                 var tableref = document.getElementById("tabla").getElementsByTagName("tbody")[0];
-                var newtext;
                 for(i = 0; i < 4;i++){
-                  //tableref.rows[i].cells[1] = rates[1];
                   tableref.rows[i].cells[1].innerHTML = rates[i];
                 }
                 
