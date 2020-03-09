@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      #tabla {
+        border-collapse: collapse;
+        margin-left: 20%;
+        margin-right: 20%;
+        width:50%;
+      }
+      
+      #tabla td, #tabla th {
+        padding: 8px;
+      }
+      
+      #tabla tr:nth-child(even){background-color: #f2f2f2;}
+      
+      #tabla tr:hover {background-color: #ddd;}
+      
+      #tabla thead td {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #4CAF50;
+        color: white;
+      }
+      </style>
+    <script>
+        function LoadJSON() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+
+                console.log("ready state");
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log("todo bien");
+                    var datos = this.responseText;
+                    console.log(datos);
+                    //document.getElementById("demo").innerHTML = "gfdagdagdga";
+                
+                var misdatos = JSON.parse(datos); // Array de datos
+                console.log(misdatos);
+                console.log(misdatos.base);
+                
+                var rates = Object.values(misdatos.rates);
+                console.log("CAD: " + rates.CAD);
+                console.log("AUD: " +  rates.AUD);
+                console.log(rates);
+                console.log("FIN");
+                var values = Object.values(misdatos);
+                console.log(values);
+
+                document.getElementById("Fecha").innerHTML = "<b>Fecha: </b>" + values[2];
+                document.getElementById("Base").innerHTML = "<b>Base: </b>" + values[1];
+
+                //document.getElementById("tabla").innerHTML = txtDatos;
+                var tableref = document.getElementById("tabla").getElementsByTagName("tbody")[0];
+                var newtext;
+                for(i = 0; i < 4;i++){
+                  //tableref.rows[i].cells[1] = rates[1];
+                  tableref.rows[i].cells[1].innerHTML = rates[i];
+                }
+                
+                }
+            }
+            xhttp.open("GET", "https://api.exchangeratesapi.io/latest", true);
+            xhttp.send();
+        }
+        </script>       
+</head>
+<body>
+  <button onclick="LoadJSON()">Buscar</button>
+  <p id="Fecha"><b>Fecha:</b></p>
+  <p id="Base"><b>Base:</b></p>
+    <table id="tabla">
+      <thead>
+        <td>Currency</td>
+        <td>Spot</td>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            CAD
+          </td>
+          <td>
+            
+          </td>
+        </tr>
+        <tr>
+          <td>
+            HDK
+          </td>
+          <td>
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+            ISK
+          </td>
+          <td>
+
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+    
+     
+</body>
+</html>
